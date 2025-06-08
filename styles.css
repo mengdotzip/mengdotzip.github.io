@@ -5,20 +5,6 @@ body {
     height: 100vh;
     font-size: 16px; /* Fixed size, no scaling */
     line-height: 1; /* Exactly 1x line height */
-
-    /* Prevent mobile font scaling */
-    -webkit-text-size-adjust: 100%;
-    -moz-text-size-adjust: 100%;
-    -ms-text-size-adjust: 100%;
-    text-size-adjust: 100%;
-    
-    /* Force consistent character spacing */
-    letter-spacing: 0;
-    word-spacing: 0;
-    
-    /* Prevent font smoothing differences */
-    -webkit-font-smoothing: none;
-    -moz-osx-font-smoothing: unset;
 }
 
 .terminal {
