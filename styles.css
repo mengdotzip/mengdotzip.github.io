@@ -1,0 +1,25 @@
+body {
+    background-color: white;
+    color: black;
+    font-family: 'Courier New', monospace;
+    height: 100vh;
+}
+
+.terminal {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    white-space: pre; 
+}
+
+.asci_logo{
+    text-align: center;
+}
+
+.asci_note{
+    text-align: center;
+}
+
+.asci_projects{
+    text-align: center;
+}
