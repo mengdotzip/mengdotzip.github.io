@@ -5,7 +5,6 @@ var div_footer = document.getElementById('footer');
 
 //screen
 async function initScreen() {
-    console.log(window.innerWidth);
     let logoType = 1;
     let projectType = 1;
     if(window.innerWidth > 600){
@@ -91,7 +90,7 @@ const arr_projects = [`
 |                    |
 |                    |
 |                    |
-|    Comming soon    |
+|    coming soon     |
 |                    |
 |                    |
 +--------------------+
@@ -229,7 +228,6 @@ var oldProjectsType = 1;
 async function evaluateScreen() {
     if(idle_animation){
         let {logoType, projectType} = await initScreen();
-        console.log(logoType, projectType);
         if (oldLogoType != logoType){
             idle_animation = false;
             await idle_stopped;
@@ -257,7 +255,6 @@ async function evaluateScreen() {
 
 async function start() {
     let {logoType, projectType} = await initScreen();
-    console.log(logoType);
     await initLogo(logoType);
     await processIterable(div_logo, char_logo);
     await processIterable(div_note, char_note);
