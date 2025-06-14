@@ -166,7 +166,7 @@ Why you might be here:
 
 //FUNCS
 var idle_animation = false;
-var idle_stopped = false;
+var idle_stopped = true;
 
 async function processIterable(div, asciArt) {
     for (let i = 0; i < asciArt.length; i++) {
@@ -197,10 +197,18 @@ async function addCursor(div, milliseconds) {
 async function idleAnimation(div) {
     idle_animation = true;
     idle_stopped = false;
+    evaluateScreen()
     while (idle_animation) {
         await addCursor(div, 1500)
     }
     idle_stopped = true;
+}
+
+async function stopIdle(){
+    idle_animation = false;
+    while (!idle_stopped) {
+        await new Promise(r => setTimeout(r, 2));
+    } ;
 }
 
 async function addLinks(div) {
@@ -217,7 +225,7 @@ async function addLinks(div) {
         const isEmail = url.startsWith('mailto:');
         const target = isEmail ? '' : 'target="_blank"';
         const regex = new RegExp(text, 'g');
-        html = html.replace(regex, `<a href="${url}" class="project-link" ${target}>${text}</a>`);
+        html = html.replace(regex, `<a href="${url}" class="pl" ${target}>${text}</a>`);
     }
     
     div.innerHTML = html;
@@ -225,31 +233,36 @@ async function addLinks(div) {
 
 var oldLogoType = 1;
 var oldProjectsType = 1;
+var drawingBusy = false;
 async function evaluateScreen() {
-    if(idle_animation){
-        let {logoType, projectType} = await initScreen();
+    if(idle_animation && !drawingBusy){
+        let {logoType} = await initScreen();
         if (oldLogoType != logoType){
-            idle_animation = false;
-            await idle_stopped;
+            drawingBusy = true;
+            await stopIdle()
             char_logo = ``;
             await deleteChars(div_logo);
+            let {logoType} = await initScreen(); //call this again to get the latest version of the screen after deleting the chars
             await initLogo(logoType);
             await processIterable(div_logo, char_logo);
             oldLogoType = logoType;
             idleAnimation(div_footer);
         }
+        let {projectType} = await initScreen(); //Same here, get the latest version after potentially waiting for the logo
         if (oldProjectsType != projectType){
-            idle_animation = false;
-            await idle_stopped;
+            drawingBusy = true;
+            await stopIdle()
             char_projects = ``;
             await deleteChars(div_projects);
+            let {projectType} = await initScreen();
             await initProjects(projectType);
             await processIterable(div_projects, char_projects);
             addLinks(div_projects);
             oldProjectsType = projectType;
+            drawingBusy = false; //calling this at the end before idleAnimation is key to get the logo to sync in edge cases
             idleAnimation(div_footer);
         }
-        
+        drawingBusy = false;
     }
 }
 

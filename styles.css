@@ -25,3 +25,20 @@ body {
 .asci_projects{
     text-align: center;
 }
+
+.pl{ /*project link */
+    text-decoration: none;
+}
+
+.pl:hover{  
+    background-color: black;
+    color: white !important;
+} 
+
+.pl:link{   
+    color: black;
+} 
+
+.pl:visited{   
+    color: black;
+} 
