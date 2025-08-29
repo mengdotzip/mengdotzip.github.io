@@ -171,7 +171,7 @@ var idle_stopped = true;
 async function processIterable(div, asciArt) {
     for (let i = 0; i < asciArt.length; i++) {
         div.innerHTML += asciArt[i];
-        await addCursor(div, 10);
+        await new Promise(r => setTimeout(r, 1)); //using addCursor for delay here is just simply to slow bcs of DOM Operations
     }
 }
 
@@ -181,7 +181,7 @@ async function deleteChars(div) {
     for (let indexChar = 0; indexChar < ogDivLeng; indexChar++) {
         animationStr = animationStr.substring(0, animationStr.length - 1)
         div.innerHTML = animationStr;
-        await addCursor(div, 2);
+        await new Promise(r => setTimeout(r, 1));
     }
     div.innerHTML = '';
     
@@ -214,8 +214,8 @@ async function stopIdle(){
 async function addLinks(div) {
     const linkMappings = {
         'proxy.meng.zip': 'https://proxy.meng.zip',
-        'github.mazarin': 'https://github.com/Maty-0/Mazarin',
-        'github.script': 'https://github.com/Maty-0/Meng-Script',
+        'github.mazarin': 'https://github.com/mengdotzip/Mazarin',
+        'github.script': 'https://github.com/mengdotzip/Meng-Script',
         'hello@meng.zip': 'mailto:hello@meng.zip'
     };
 
