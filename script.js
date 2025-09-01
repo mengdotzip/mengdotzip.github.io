@@ -86,6 +86,17 @@ const arr_projects = [`
 `,
 `
 +--------------------+
+|    ai.meng.zip     |
+|                    |
+|                    |
+|                    |
+|     github.ai      |
+|                    |
+|                    |
++--------------------+
+`,
+`
++--------------------+
 |       Blog         |
 |                    |
 |                    |
@@ -215,7 +226,8 @@ async function addLinks(div) {
     const linkMappings = {
         'proxy.meng.zip': 'https://proxy.meng.zip',
         'github.mazarin': 'https://github.com/mengdotzip/Mazarin',
-        'github.script': 'https://github.com/mengdotzip/Meng-Script',
+        'github.script':  'https://github.com/mengdotzip/Meng-Script',
+        'github.ai':      'https://github.com/mengdotzip/ai.meng.zip',
         'hello@meng.zip': 'mailto:hello@meng.zip'
     };
 
