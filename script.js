@@ -86,6 +86,17 @@ const arr_projects = [`
 `,
 `
 +--------------------+
+|  Sleipnir SSH Gen  |
+|                    |
+|                    |
+|                    |
+|  github.sleipnir   |
+|                    |
+|                    |
++--------------------+
+`,
+`
++--------------------+
 |    ai.meng.zip     |
 |                    |
 |                    |
@@ -227,6 +238,7 @@ async function addLinks(div) {
         'proxy.meng.zip': 'https://proxy.meng.zip',
         'github.mazarin': 'https://github.com/mengdotzip/Mazarin',
         'github.script':  'https://github.com/mengdotzip/Meng-Script',
+        'github.sleipnir':      'https://github.com/mengdotzip/sleipnir',
         'github.ai':      'https://github.com/mengdotzip/ai.meng.zip',
         'hello@meng.zip': 'mailto:hello@meng.zip'
     };
