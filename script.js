@@ -75,11 +75,11 @@ const arr_projects = [`
 `,
 `
 +--------------------+
-|    Meng Script     |
+|     LXD-Marina     |
 |                    |
 |                    |
 |                    |
-|   github.script    |
+|   github.marina    |
 |                    |
 |                    |
 +--------------------+
@@ -91,6 +91,17 @@ const arr_projects = [`
 |                    |
 |                    |
 |  github.sleipnir   |
+|                    |
+|                    |
++--------------------+
+`,
+`
++--------------------+
+|    Meng Script     |
+|                    |
+|                    |
+|                    |
+|   github.script    |
 |                    |
 |                    |
 +--------------------+
@@ -237,6 +248,7 @@ async function addLinks(div) {
     const linkMappings = {
         'proxy.meng.zip': 'https://proxy.meng.zip',
         'github.mazarin': 'https://github.com/mengdotzip/Mazarin',
+        'github.marina': 'https://github.com/mengdotzip/LXD-Marina',
         'github.script':  'https://github.com/mengdotzip/Meng-Script',
         'github.sleipnir':      'https://github.com/mengdotzip/sleipnir',
         'github.ai':      'https://github.com/mengdotzip/ai.meng.zip',
