@@ -2,6 +2,7 @@ var div_logo = document.getElementById('logo');
 var div_note = document.getElementById('note');
 var div_projects = document.getElementById('projects');
 var div_footer = document.getElementById('footer');
+var skip_header = document.getElementById('skip_header');
 
 //screen
 async function initScreen() {
@@ -24,7 +25,6 @@ async function initScreen() {
     }
 }
 
-
 //LOGO
 var char_logo = ``;
 async function initLogo(logoType) {
@@ -35,7 +35,7 @@ char_logo = `
 ▓██    ▓██░▒███   ▓██  ▀█ ██▒▒██░▄▄▄░     ░ ▒ ▄▀▒░ ▒██▒▓██░ ██▓▒
 ▒██    ▒██ ▒▓█  ▄ ▓██▒  ▐▌██▒░▓█  ██▓       ▄▀▒   ░░██░▒██▄█▓▒ ▒
 ▒██▒   ░██▒░▒████▒▒██░   ▓██░░▒▓███▀▒ ██▓ ▒███████▒░██░▒██▒ ░  ░
-░ ▒░   ░  ░░░ ▒░ ░░ ▒░   ▒ ▒  ░▒   ▒  ▒▓▒ ░▒▒ ▓░▒░▒░▓  ▒▓▒░ ░  ░
+░ ▒░   ░  ░░░ ▒░ ░░ ▒░   ▒ ▒  ░▒   ░  ▒▓▒ ░▒▒ ▓░▒░▒░▓  ▒▓▒░ ░  ░
 ░  ░      ░ ░ ░  ░░ ░░   ░ ▒░  ░   ░  ░▒  ░░▒ ▒ ░ ▒ ▒ ░░▒ ░     
 ░      ░      ░      ░   ░ ░ ░ ░   ░  ░   ░ ░ ░ ░ ░ ▒ ░░░       
        ░      ░  ░         ░       ░   ░    ░ ░     ░           
@@ -57,7 +57,6 @@ char_logo = `
 `;
 }
 }
-//
 
 //PROJECTS
 var char_projects = ``;
@@ -140,30 +139,13 @@ const arr_projects = [`
 +--------------------+
 `];
 
-/*
-┌────────────────────┐
-│   Mazarin Proxy    │
-│                    │
-│                    │
-│   github.mazarin   │
-│                    │
-│   proxy.meng.zip   │
-│                    │
-└────────────────────┘
-*/
-
 async function initProjects(projCard) {
-
-    // Split each project into lines
     const projectLines = arr_projects.map(project => project.split('\n'));
     const maxLines = Math.max(...projectLines.map(p => p.length));
     const arrLeng = arr_projects.length;
     const arrLoops = Math.ceil(arrLeng/projCard);
     
-
-    // For each row, combine all projects side by side
     for (let arrLoop = 0; arrLoop < arrLoops; arrLoop++) {
-        
         for (let row = 0; row < maxLines; row++) {
             let currentRow = '';
             for (let proj = 0; proj < projCard; proj++) {
@@ -176,12 +158,10 @@ async function initProjects(projCard) {
                 if (actualProj > arrLeng - 1){
                     continue;
                 }
-                // Skip if we've run out of projects
 
-                const line = projectLines[actualProj][row] || ''; // Handle different heights
+                const line = projectLines[actualProj][row] || '';
                 currentRow += line;
 
-                // Add spacing between projects (except last one)
                 if (proj < projCard - 1) {
                     currentRow += '  ';
                 }
@@ -190,7 +170,6 @@ async function initProjects(projCard) {
         }
     }
 }
-//
 
 //NOTE
 const char_note = `
@@ -200,24 +179,51 @@ Why you might be here:
 //FUNCS
 var idle_animation = false;
 var idle_stopped = true;
+var skipAnimation = false;
 
-async function processIterable(div, asciArt) {
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && !idle_animation) {
+        skipAnimation = true;
+    }
+});
+
+function hideSkip() {
+    skip_header.style.visibility = "hidden";
+}
+
+function showSkip() {
+    skip_header.style.visibility = "visible";
+}
+
+async function processIterable(div, asciArt, canSkip = false) {
+    if (skipAnimation && canSkip) {
+        div.innerHTML = asciArt;
+        return;
+    }
+    
     for (let i = 0; i < asciArt.length; i++) {
+        if (skipAnimation && canSkip) {
+            div.innerHTML += asciArt.substring(i);
+            return;
+        }
         div.innerHTML += asciArt[i];
-        await new Promise(r => setTimeout(r, 1)); //using addCursor for delay here is just simply to slow bcs of DOM Operations
+        await new Promise(r => setTimeout(r, 1));
     }
 }
 
-async function deleteChars(div) {
+async function deleteChars(div, canSkip = false) {
     const ogDivLeng = div.innerHTML.length;
     let animationStr = div.innerHTML;
     for (let indexChar = 0; indexChar < ogDivLeng; indexChar++) {
+        if (skipAnimation && canSkip) {
+            div.innerHTML = '';
+            return;
+        }
         animationStr = animationStr.substring(0, animationStr.length - 1)
         div.innerHTML = animationStr;
         await new Promise(r => setTimeout(r, 1));
     }
     div.innerHTML = '';
-    
 }
 
 async function addCursor(div, milliseconds) {
@@ -230,9 +236,10 @@ async function addCursor(div, milliseconds) {
 async function idleAnimation(div) {
     idle_animation = true;
     idle_stopped = false;
-    evaluateScreen()
+    hideSkip();
+    evaluateScreen();
     while (idle_animation) {
-        await addCursor(div, 1500)
+        await addCursor(div, 1500);
     }
     idle_stopped = true;
 }
@@ -241,7 +248,7 @@ async function stopIdle(){
     idle_animation = false;
     while (!idle_stopped) {
         await new Promise(r => setTimeout(r, 2));
-    } ;
+    };
 }
 
 async function addLinks(div) {
@@ -270,32 +277,36 @@ async function addLinks(div) {
 var oldLogoType = 1;
 var oldProjectsType = 1;
 var drawingBusy = false;
+
 async function evaluateScreen() {
     if(idle_animation && !drawingBusy){
         let {logoType} = await initScreen();
         if (oldLogoType != logoType){
             drawingBusy = true;
-            await stopIdle()
+            await stopIdle();
             char_logo = ``;
-            await deleteChars(div_logo);
-            let {logoType} = await initScreen(); //call this again to get the latest version of the screen after deleting the chars
+            await deleteChars(div_logo, true); 
+            let {logoType} = await initScreen();
             await initLogo(logoType);
-            await processIterable(div_logo, char_logo);
+            await processIterable(div_logo, char_logo, true); 
             oldLogoType = logoType;
             idleAnimation(div_footer);
         }
-        let {projectType} = await initScreen(); //Same here, get the latest version after potentially waiting for the logo
+        
+        let {projectType} = await initScreen();
         if (oldProjectsType != projectType){
             drawingBusy = true;
-            await stopIdle()
+            skipAnimation = false;
+            showSkip();
+            await stopIdle();
             char_projects = ``;
-            await deleteChars(div_projects);
+            await deleteChars(div_projects, true);
             let {projectType} = await initScreen();
             await initProjects(projectType);
-            await processIterable(div_projects, char_projects);
+            await processIterable(div_projects, char_projects, true);
             addLinks(div_projects);
             oldProjectsType = projectType;
-            drawingBusy = false; //calling this at the end before idleAnimation is key to get the logo to sync in edge cases
+            drawingBusy = false;
             idleAnimation(div_footer);
         }
         drawingBusy = false;
@@ -303,15 +314,23 @@ async function evaluateScreen() {
 }
 
 async function start() {
+    skipAnimation = false;
+    showSkip();
+    
     let {logoType, projectType} = await initScreen();
+    
     await initLogo(logoType);
-    await processIterable(div_logo, char_logo);
-    await processIterable(div_note, char_note);
+    await processIterable(div_logo, char_logo, true);
+    
+    await processIterable(div_note, char_note, true);
     await initProjects(projectType);
-    await processIterable(div_projects, char_projects);
+    await processIterable(div_projects, char_projects, true);
     addLinks(div_projects);
+    
     oldLogoType = logoType;
     oldProjectsType = projectType;
+    
+    hideSkip();
     idleAnimation(div_footer);
 }
 

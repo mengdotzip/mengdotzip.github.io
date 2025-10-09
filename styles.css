@@ -42,3 +42,9 @@ body {
 .pl:visited{   
     color: black;
 } 
+
+.skip_header{
+    display: flex;
+    justify-content: center;
+    visibility: unset;
+}
