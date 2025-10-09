@@ -162,8 +162,11 @@ async function initProjects(projCard) {
                 const line = projectLines[actualProj][row] || '';
                 currentRow += line;
 
-                if (proj < projCard - 1) {
+                const nextProj = actualProj + 1;
+                if (nextProj < arrLeng) {
                     currentRow += '  ';
+                } else{
+                    currentRow += ' ';
                 }
             }
             char_projects += currentRow + '\n';
