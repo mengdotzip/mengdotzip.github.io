@@ -63,6 +63,17 @@ var char_projects = ``;
 
 const arr_projects = [`
 +--------------------+
+|   .deb Packages    |
+|                    |
+|                    |
+|                    |
+|      fynedesk      |
+|                    |
+|                    |
++--------------------+
+`,
+`
++--------------------+
 |   Mazarin Proxy    |
 |                    |
 |                    |
@@ -118,11 +129,11 @@ const arr_projects = [`
 `,
 `
 +--------------------+
-|       Blog         |
+|       KEYS         |
 |                    |
 |                    |
 |                    |
-|    coming soon     |
+|   meng.zip/keys    |
 |                    |
 |                    |
 +--------------------+
@@ -256,13 +267,15 @@ async function stopIdle(){
 
 async function addLinks(div) {
     const linkMappings = {
+        'fynedesk': "https://meng.zip/fynedesk/fynedesk_0.4.0-1_amd64.deb",
         'proxy.meng.zip': 'https://proxy.meng.zip',
         'github.mazarin': 'https://github.com/mengdotzip/Mazarin',
         'github.marina': 'https://github.com/mengdotzip/LXD-Marina',
         'github.script':  'https://github.com/mengdotzip/Meng-Script',
-        'github.sleipnir':      'https://github.com/mengdotzip/sleipnir',
+        'github.sleipnir': 'https://github.com/mengdotzip/sleipnir',
         'github.ai':      'https://github.com/mengdotzip/ai.meng.zip',
-        'hello@meng.zip': 'mailto:hello@meng.zip'
+        'meng.zip/keys ': 'https://meng.zip/keys/',
+        'hello@meng.zip': 'mailto:hello@meng.zip',
     };
 
     let html = div.innerHTML;
