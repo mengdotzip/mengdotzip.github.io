@@ -267,7 +267,7 @@ async function stopIdle(){
 
 async function addLinks(div) {
     const linkMappings = {
-        'fynedesk': "https://meng.zip/fynedesk/fynedesk_0.4.0-1_amd64.deb",
+        'fynedesk': "https://meng.zip/packages/fynedesk/fynedesk_0.4.0-1_amd64.deb",
         'proxy.meng.zip': 'https://proxy.meng.zip',
         'github.mazarin': 'https://github.com/mengdotzip/Mazarin',
         'github.marina': 'https://github.com/mengdotzip/LXD-Marina',
