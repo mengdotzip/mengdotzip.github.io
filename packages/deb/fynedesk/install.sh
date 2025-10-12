@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-REPO_URL="https://meng.zip/packages/fynedesk"
+REPO_URL="https://meng.zip/packages/deb/fynedesk"
 
 echo "Installing FyneDesk repository..."
 
