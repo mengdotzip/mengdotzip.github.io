@@ -67,30 +67,19 @@ const arr_projects = [`
 |                    |
 |                    |
 |       Browse       |
+|                    |
 |      fynedesk      |
 |                    |
-|                    |
 +--------------------+
 `,
 `
 +--------------------+
-|   Mazarin Proxy    |
+|  reMazarin Proxy   |
 |                    |
 |                    |
-|   github.mazarin   |
+|  github.remazarin  |
 |                    |
 |   proxy.meng.zip   |
-|                    |
-+--------------------+
-`,
-`
-+--------------------+
-|     LXD-Marina     |
-|                    |
-|                    |
-|                    |
-|   github.marina    |
-|                    |
 |                    |
 +--------------------+
 `,
@@ -112,6 +101,17 @@ const arr_projects = [`
 |                    |
 |                    |
 |   github.script    |
+|                    |
+|                    |
++--------------------+
+`,
+`
++--------------------+
+|     LXD-Marina     |
+|                    |
+|                    |
+|                    |
+|   github.marina    |
 |                    |
 |                    |
 +--------------------+
@@ -269,7 +269,7 @@ async function addLinks(div) {
     const linkMappings = {
         'fynedesk': "https://meng.zip/packages/deb/fynedesk/fynedesk_0.4.0-1_amd64.deb",
         'proxy.meng.zip': 'https://proxy.meng.zip',
-        'github.mazarin': 'https://github.com/mengdotzip/Mazarin',
+        'github.remazarin': 'https://github.com/mengdotzip/reMazarin',
         'github.marina': 'https://github.com/mengdotzip/LXD-Marina',
         'github.script':  'https://github.com/mengdotzip/Meng-Script',
         'github.sleipnir': 'https://github.com/mengdotzip/sleipnir',
